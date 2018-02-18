@@ -14,6 +14,3 @@ def processMessage(request):
     return JsonResponse({"response": json_data['output'], "conversation_id": json_data['conversation_id']})
 
     # return render(request, "webapp/index.html")
-
-def generateConversationID(request):
-    pass
