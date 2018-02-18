@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script>var csrf_token = $("{% csrf_token %}").val();</script>
         <script>
@@ -39,9 +42,30 @@
                 return "";
             }
         </script>
+        <style type="text/css">
+            body { background: black !important; }
+            .messageBox-vertical-center {
+              min-height: 100%;
+              min-height: 100vh;
+
+              display: flex;
+              align-items: flex-end;
+            }
+            .text{
+                color: #ffffff;
+            }
+        </style>
     </head>
-    <body>
-        <input id="message" type="text" title="message">
-        <button id="send">Send</button>
-    </body>
+<body>
+    <div class="container">
+        <div class="col">
+                <div class="messageBox-vertical-center">
+                  <input type="text" class="form-control" placeholder="message..." aria-label="message..." aria-describedby="basic-addon2">
+                  <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" type="button">send</button>
+                  </div>
+                </div>
+        </div>
+    </div>
+</body>
 </html>
