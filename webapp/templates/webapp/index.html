@@ -1,4 +1,47 @@
+<!DOCTYPE html>
 <html>
-    <title>Your friend.</title>
-    <h1>I'm your friend.</h1>
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script>var csrf_token = $("{% csrf_token %}").val();</script>
+        <script>
+                var messageData = "Hello";
+
+                $.ajax({url:'{% url 'sendMessage' %}',
+                data:{"message": messageData},
+                type:"POST",
+                processData: false,
+                headers:{"X-CSRFToken": csrf_token}})
+            </script>
+
+        <script>
+            function checkCookieExistence() {
+                var sessionID = getCookie();
+                if(sessionID != ""){
+                    //sessionID exists
+                }else{
+                    //need to create a new sessionID with django
+                }
+            }
+
+            function getCookie() {
+                var name = "bf_session=";
+                var decodedCookie = decodeURIComponent(document.cookie);
+                var ca = decodedCookie.split(';');
+                for(var i = 0; i <ca.length; i++) {
+                    var c = ca[i];
+                    while (c.charAt(0) == ' ') {
+                        c = c.substring(1);
+                    }
+                    if (c.indexOf(name) == 0) {
+                        return c.substring(name.length, c.length);
+                    }
+                }
+                return "";
+            }
+        </script>
+    </head>
+    <body>
+        <input id="message" type="text" title="message">
+        <button id="send">Send</button>
+    </body>
 </html>
