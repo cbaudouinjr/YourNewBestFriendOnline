@@ -74,17 +74,20 @@
             }
         </script>
         <style type="text/css">
-            body { background: black !important; }
+html,body{min-height:100%;}
+            body { background: #000 !important; }
             .messageBox-vertical-center {
-              min-height: 100%;
-              min-height: 100vh;
+              /*min-height: 100%;
+              min-height: 100vh;*/
+				height: 50px;
+					width:60%;
+			     position:fixed;
+					  bottom:0px;
+						  display:flex;
 
-              display: flex;
-              align-items: center;
-                position: sticky;
             }
             .text{
-                color: #ffffff;
+                color: #eee;
                 text-align: center;
             }
             .image-center{
@@ -94,7 +97,8 @@
                 position: relative;
             }
             .msg-pos{
-                color: #ffffff;
+                color: #eee;
+				    font-size:20px;
                 text-align: center;
             }
         </style>
@@ -109,7 +113,7 @@
                 <div class="messageBox-vertical-center">
                   <input type="text" class="form-control" placeholder="message..." aria-label="message..." aria-describedby="basic-addon2" id="message">
                   <div class="input-group-append">
-                    <button class="btn btn-outline-secondary" type="submit">send</button>
+                      <button class="btn btn-outline-secondary" type="submit">send</button>
                   </div>
                 </div>
               </form>
