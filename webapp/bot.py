@@ -1,9 +1,16 @@
-from django.shortcuts import render
+# from django.shortcuts import render
 import requests
+from django.http import JsonResponse
 
 def processMessage(request):
-    r = requests.get("http://www.cleverbot.com/getreply?key=CC7ahK5j61mGnivkAzEmsoI6aEA&input=YouSuck!&cs=76nxdxIJ02AAA")
-    json_data = r.json()
-    print("Reply: "+json_data['output'])
+    assert("message" in request.POST)
 
-    return render(request, "webapp/index.html")
+    r = requests.get("http://www.cleverbot.com/getreply", params={
+        "key": "CC7ahK5j61mGnivkAzEmsoI6aEA",
+        "input": request.POST["message"],
+    })
+    json_data = r.json()
+
+    return JsonResponse({"response": json_data['output']})
+
+    # return render(request, "webapp/index.html")

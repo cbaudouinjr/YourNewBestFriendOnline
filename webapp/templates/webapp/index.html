@@ -7,16 +7,26 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script>var csrf_token = $("{% csrf_token %}").val();</script>
         <script>
-                var messageData = "Hello";
+			   function sendMessage(){
+                var messageData = $("#message").val();
+					$("#message").prop("disabled", true);
 
-                $.ajax({url:'{% url 'sendMessage' %}',
-                data:{"message": messageData},
-                type:"POST",
-                processData: false,
-                headers:{"X-CSRFToken": csrf_token}})
-            </script>
+                $.ajax({
+						  url:'{% url 'sendMessage' %}',
+                    data:{message: messageData},
+                    type:"POST",
+                    processData: true,
+                    headers:{"X-CSRFToken": csrf_token},
+						  success:function(content, response){
+							   // response should equal "success"
+							   console.log(content);
+							   $("#conversation").text(content["response"]);
+							   $("#message").prop("disabled", false);
+							   
+						  }
+					 });
+				}
 
-        <script>
             function checkCookieExistence() {
                 var sessionID = getCookie();
                 if(sessionID != ""){
@@ -58,13 +68,16 @@
     </head>
 <body>
     <div class="container">
+		  <div id="conversation"></div>
         <div class="col">
+		      <form onsubmit="sendMessage();return false;">
                 <div class="messageBox-vertical-center">
-                  <input type="text" class="form-control" placeholder="message..." aria-label="message..." aria-describedby="basic-addon2">
+                  <input type="text" class="form-control" placeholder="message..." aria-label="message..." aria-describedby="basic-addon2" id="message">
                   <div class="input-group-append">
-                    <button class="btn btn-outline-secondary" type="button">send</button>
+                    <button class="btn btn-outline-secondary" type="submit">send</button>
                   </div>
                 </div>
+            </form>
         </div>
     </div>
 </body>
