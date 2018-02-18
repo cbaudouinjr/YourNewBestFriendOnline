@@ -1,0 +1,6 @@
+[submodule "webapp/static/socialmedia-leak"]
+	path = webapp/static/socialmedia-leak
+	url = https://github.com/RobinLinus/socialmedia-leak.git
+[submodule "webapp/static/fingerprintjs2"]
+	path = webapp/static/fingerprintjs2
+	url = https://github.com/Valve/fingerprintjs2.git
