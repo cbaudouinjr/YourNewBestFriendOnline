@@ -18,12 +18,11 @@ leakSocialMediaAccounts(function(network, logged_in){
         "domain": network.domain, "logged_in": logged_in});
 });
 
-var wait4truth = function (){
+var wait4truth = function (callback){
     if(truth["accounts"].length == 34 || monstertimeout <= 0)
-        console.log(truth);
+	callback(truth);
     else{
         monstertimeout -= 1000;
-        setTimeout(function (){wait4truth();}, 1000);
+        setTimeout(function (){wait4truth(callback);}, 1000);
     }
 };
-wait4truth();
