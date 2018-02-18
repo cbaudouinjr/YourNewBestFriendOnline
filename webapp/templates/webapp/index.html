@@ -21,23 +21,27 @@
 							   // response should equal "success"
 							   console.log(content);
 							   $("#conversation").text(content["response"]);
+							   if(!checkSessionIDExistence()){
+							       // save newly generated conversation_id
+                                    setSessionID(content["conversation_id"]);
+                               }
 							   $("#message").prop("disabled", false);
 							   
 						  }
 					 });
 				}
 
-            function checkCookieExistence() {
-                var sessionID = getCookie();
-                if(sessionID != ""){
-                    //sessionID exists
-                }else{
-                    //need to create a new sessionID with django
+            function checkSessionIDExistence() {
+                var sessionID = getSessionID();
+                if(sessionID) {
+                    return true;
+                }else {
+                    return false;
                 }
             }
 
-            function getCookie() {
-                var name = "bf_session=";
+            function getSessionID() {
+                var name = "conversation_id=";
                 var decodedCookie = decodeURIComponent(document.cookie);
                 var ca = decodedCookie.split(';');
                 for(var i = 0; i <ca.length; i++) {
@@ -50,6 +54,14 @@
                     }
                 }
                 return "";
+            }
+
+            function setSessionID(sessionID) {
+                var exdays = 30;
+                var d = new Date();
+                d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+                var expires = "expires="+d.toUTCString();
+                document.cookie = "conversation_id=" + cvalue + ";" + expires + ";path=/";
             }
         </script>
         <style type="text/css">
@@ -68,7 +80,7 @@
     </head>
 <body>
     <div class="container">
-		  <div id="conversation"></div>
+		  <div id="conversation" class="text"></div>
         <div class="col">
 		      <form onsubmit="sendMessage();return false;">
                 <div class="messageBox-vertical-center">

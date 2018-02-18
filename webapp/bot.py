@@ -11,6 +11,9 @@ def processMessage(request):
     })
     json_data = r.json()
 
-    return JsonResponse({"response": json_data['output']})
+    return JsonResponse({"response": json_data['output'], "conversation_id": json_data['conversation_id']})
 
     # return render(request, "webapp/index.html")
+
+def generateConversationID(request):
+    pass
